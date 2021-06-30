@@ -142,3 +142,21 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/vim,osx,node,linux,windows
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+
+# next.js
+/.next/
+/out/
+
+
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
