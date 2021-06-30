@@ -2,7 +2,7 @@
 
 ## Links and Resources
 
-- [Deployed Site]()
+- [Deployed Site](https://nextjs-practice-virtual-store.vercel.app/)
 - [Next JS](https://nextjs.org/docs/getting-started)
 
 ## Overview
