@@ -1,9 +1,19 @@
-import React from "react";
+import React from 'react';
+import { Typography, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+}));
 
 function SelectCategories() {
+  const classes = useStyles();
   return (
-    <div>
-      <h1>Select Category section for now</h1>
+    <div className={classes.root}>
+      <h2>Browse Our Categories</h2>
     </div>
   );
 }

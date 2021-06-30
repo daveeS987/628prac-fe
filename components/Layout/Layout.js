@@ -14,7 +14,6 @@ function Layout({ children }) {
         />
       </Head>
       <Header />
-      <h1>Layout for now</h1>
       {children}
       <Footer />
     </>

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This will be a practice repository to explore the capabilities of NextJS. I will be exploring features of NextJs such as options for static site generation, server side rendering, and being able to perform CRUD operations to Mongo Database without the use of a dedicated backend server.
+This is a practice repository to explore the capabilities of NextJS. I will be using features of NextJs that allows us to perform static site generation, server side rendering, and CRUD operations to a Mongo Database without the use of a dedicated backend server.
 
 currently work in progess....
 
