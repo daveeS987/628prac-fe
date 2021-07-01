@@ -24,7 +24,7 @@ function SelectCategories() {
             color="textPrimary"
             gutterBottom
           >
-            Products Category
+            Product Category
           </Typography>
           <Typography
             variant="h5"
