@@ -1,28 +1,45 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { Container, Typography, Grid, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    borderTop: `2px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
   },
 }));
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Davee Sok
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 function Footer() {
   const classes = useStyles();
   return (
     <>
-      <Container maxWidth="lg" component="footer" className={classes.footer}>
-        <Grid container justify="center">
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" color="textPrimary">
-              © Davee Sok
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Davee's Virtual Store
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
+          A mock virtual store built with NextJs, Material UI, MongoDB
+        </Typography>
+        <Copyright />
+      </footer>
     </>
   );
 }
