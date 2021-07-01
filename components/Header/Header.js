@@ -13,12 +13,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  // menuButton: {
-  //   marginRight: theme.spacing(2),
-  // },
-  // title: {
-  //   flexGrow: 1,
-  // },
 }));
 
 function Header() {
@@ -28,7 +22,6 @@ function Header() {
     <div className={classes.root}>
       <AppBar position="relative">
         <Toolbar>
-          {/* <CameraIcon className={classes.icon} /> */}
           <Typography variant="h6" color="inherit" noWrap>
             Davee's NextJS Mock Virtual Store
           </Typography>

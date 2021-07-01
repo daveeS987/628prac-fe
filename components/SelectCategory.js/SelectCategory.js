@@ -30,7 +30,11 @@ function SelectCategory({ category }) {
         align="center"
       >
         {category.map((category) => {
-          return <Button key={category.id}>{category.name}</Button>;
+          return (
+            <Button key={category.id} id={category.id}>
+              {category.name}
+            </Button>
+          );
         })}
       </ButtonGroup>
     </div>

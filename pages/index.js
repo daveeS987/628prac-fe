@@ -3,7 +3,7 @@ import React from 'react';
 import { MongoClient } from 'mongodb';
 import Layout from '../components/Layout/Layout';
 import SelectCategory from '../components/SelectCategory.js/SelectCategory';
-import Category from '../components/Category/Category';
+import CurrentCategory from '../components/Category/Category';
 import Products from '../components/Products/Products';
 
 export async function getStaticProps() {
@@ -25,6 +25,7 @@ export async function getStaticProps() {
         id: category._id.toString(),
       })),
     },
+    revalidate: 10,
   };
 }
 
@@ -34,7 +35,7 @@ export default function Home({ categories }) {
       {/* <CssBaseline /> */}
       <Layout>
         <SelectCategory category={categories} />
-        <Category />
+        <CurrentCategory />
         <Products />
       </Layout>
     </React.Fragment>

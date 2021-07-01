@@ -38,6 +38,14 @@ function Footer() {
         >
           A mock virtual store built with NextJs, Material UI, MongoDB
         </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="textSecondary"
+          component="p"
+        >
+          work still in progress....
+        </Typography>
         <Copyright />
       </footer>
     </>
