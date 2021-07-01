@@ -7,22 +7,31 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: '2rem',
+    marginBottom: '2rem',
   },
 });
 
-function SelectCategory() {
+function SelectCategory({ category }) {
+  console.log(
+    '🚀 ~ file: SelectCategory.js ~ line 15 ~ SelectCategory ~ category',
+    category
+  );
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography variant="h5">Browse Our Categories</Typography>
+      <Typography align="center" variant="h5">
+        Browse Our Categories
+      </Typography>
       <ButtonGroup
         variant="text"
         color="primary"
         aria-label="text primary button group"
+        align="center"
       >
-        <Button>One</Button>
-        <Button>Two</Button>
-        <Button>Three</Button>
+        {category.map((category) => {
+          return <Button key={category.id}>{category.name}</Button>;
+        })}
       </ButtonGroup>
     </div>
   );
