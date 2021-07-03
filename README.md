@@ -14,8 +14,8 @@ currently work in progess....
 ## Tools & Dependencies
 
 - NextJS
-- React/Redux
-- Redux Thunk
+- React-Redux
+- Redux Toolkit
 - MongoDB
 - Mongoose
 - Axios

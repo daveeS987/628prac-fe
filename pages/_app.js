@@ -1,13 +1,12 @@
 import '@fontsource/roboto';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { wrapper } from '../redux';
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <CssBaseline /> */}
       <Component {...pageProps} />
     </>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

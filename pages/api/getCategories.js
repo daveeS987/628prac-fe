@@ -1,11 +1,17 @@
 import { MongoClient } from 'mongodb';
 
-async function handleGetCategories(req, res) {
-  // to call this  fetch('/api/getCategories')
+async function handleCategories(req, res) {
+  const client = await MongoClient.connect(process.env.DB_ADDRESS, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  await client.connect();
+  const db = client.db();
+  const categoryCollection = db.collection('categories');
+  const categories = await categoryCollection.find().toArray();
+  client.close();
 
-  if (req.method == 'GET') {
-    console.log('we got to here');
-  }
+  res.status(200).json(categories);
 }
 
-export default handleGetCategories;
+export default handleCategories;

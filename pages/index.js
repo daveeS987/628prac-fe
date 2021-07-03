@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout';
 import SelectCategory from '../components/SelectCategory.js/SelectCategory';
 import CurrentCategory from '../components/Category/Category';
 import Products from '../components/Products/Products';
+import axios from 'axios';
 
 export async function getStaticProps() {
   const client = await MongoClient.connect(process.env.DB_ADDRESS, {

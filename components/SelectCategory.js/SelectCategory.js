@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, Typography, ButtonGroup, Button } from '@material-ui/core';
+import axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -17,6 +18,14 @@ function SelectCategory({ category }) {
     category
   );
 
+  const apiCall = async () => {
+    let apiResult = await axios.get('/api/getCategories');
+    console.log(
+      '🚀 ~ file: SelectCategory.js ~ line 23 ~ apiCall ~ apiResult.data',
+      apiResult.data
+    );
+  };
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -31,7 +40,11 @@ function SelectCategory({ category }) {
       >
         {category.map((category) => {
           return (
-            <Button key={category.id} id={category.id}>
+            <Button
+              key={category.id}
+              id={category.id}
+              onClick={() => apiCall()}
+            >
               {category.name}
             </Button>
           );
