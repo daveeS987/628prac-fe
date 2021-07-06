@@ -3,7 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // export const getAPICategories = createAsyncThunk(
 //   'categories/getAPICategories',
-//   async()
+//   async(thunkAPI) => {
+//     const
+//   }
 // );
 
 const initialState = {

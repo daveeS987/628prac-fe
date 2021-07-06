@@ -49,11 +49,11 @@ function SelectCategory() {
             </Button>
           );
         })} */}
-      <h3></h3>
       {/* </ButtonGroup> */}
       <h3>
-        This is current count <span>{count}</span>
+        For tesing purposes &gt;&gt; This is current count <span>{count}</span>
       </h3>
+
       <button onClick={() => dispatch(incrementCount())}>Increment</button>
       <button onClick={() => dispatch(decrementcount())}>Decrement</button>
       <button onClick={() => dispatch(incrementBy(incrementAmount))}>
