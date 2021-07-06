@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { makeStyles, Typography, ButtonGroup, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   incrementCount,
   decrementcount,
   incrementBy,
+  getAPICategories,
 } from '../../store/categories.js';
-// import axios from 'axios';
 
 const useStyles = makeStyles({
   root: {
@@ -20,25 +20,26 @@ const useStyles = makeStyles({
 
 function SelectCategory() {
   const dispatch = useDispatch();
-  let categories = useSelector((state) => state.categories.entities);
-  let count = useSelector((state) => state.categories.count);
-  const [incrementAmount, setIncrementAmount] = useState(2);
-  // const apiCall = async () => {
-  //   let apiResult = await axios.get('/api/getCategories');
-  //   console.log(
-  //     '🚀 ~ file: SelectCategory.js ~ line 23 ~ apiCall ~ apiResult.data',
-  //     apiResult.data
-  //   );
-  // };
+  const count = useSelector((state) => state.categories.count);
+  let categorys = useSelector((state) => state.categories.entities);
+  console.log(
+    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categorys',
+    categorys
+  );
+
+  useEffect(() => {
+    dispatch(getAPICategories());
+  }, []);
 
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Typography align="center" variant="h5">
-        Browse Our Categories
-      </Typography>
-      {/* <ButtonGroup variant='text' color='primary' aria-label='text primary button group' align='center'> */}
-      {/* {category.map((category) => {
+    <>
+      <div className={classes.root}>
+        <Typography align="center" variant="h5">
+          Browse Our Categories
+        </Typography>
+        {/* <ButtonGroup variant='text' color='primary' aria-label='text primary button group' align='center'> */}
+        {/* {category.map((category) => {
           return (
             <Button
               key={category.id}
@@ -49,17 +50,20 @@ function SelectCategory() {
             </Button>
           );
         })} */}
-      {/* </ButtonGroup> */}
-      <h3>
-        For tesing purposes &gt;&gt; This is current count <span>{count}</span>
-      </h3>
+        {/* </ButtonGroup> */}
+      </div>
+      <div>
+        <h3>
+          For tesing purposes &gt;&gt; This is current count{' '}
+          <span>{count}</span>
+        </h3>
+        <p>{JSON.stringify(categorys)}</p>
 
-      <button onClick={() => dispatch(incrementCount())}>Increment</button>
-      <button onClick={() => dispatch(decrementcount())}>Decrement</button>
-      <button onClick={() => dispatch(incrementBy(incrementAmount))}>
-        Increment by
-      </button>
-    </div>
+        <button onClick={() => dispatch(incrementCount())}>Increment</button>
+        <button onClick={() => dispatch(decrementcount())}>Decrement</button>
+        <button onClick={() => dispatch(incrementBy(2))}>Increment by</button>
+      </div>
+    </>
   );
 }
 

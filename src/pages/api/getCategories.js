@@ -10,6 +10,15 @@ async function handleCategories(req, res) {
   const categoryCollection = db.collection('categories');
   const categories = await categoryCollection.find().toArray();
   client.close();
+  // let converted = categories.map((category) => ({
+  //   name: category.name,
+  //   description: category.description,
+  //   id: category._id.toString(),
+  // }));
+  // console.log(
+  //   '🚀 ~ file: getCategories.js ~ line 18 ~ converted ~ converted',
+  //   converted
+  // );
 
   res.status(200).json(categories);
 }
