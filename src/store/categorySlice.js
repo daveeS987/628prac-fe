@@ -6,8 +6,6 @@ export const getAPICategories = createAsyncThunk(
   'categories/getAPICategories',
   async (thunkAPI) => {
     const result = await axios.get('/api/getCategories');
-    console.log('🚀 ~ file: categories.js ~ line 9 ~ result.data', result.data);
-
     return result.data;
   }
 );
@@ -31,6 +29,9 @@ const categoriesSlice = createSlice({
     incrementBy(state, action) {
       state.count += action.payload;
     },
+    initCategories(state, action) {
+      state.entities.concat(action.payload);
+    },
   },
   extraReducers: {
     // [HYDRATE]: (state, action) => {
@@ -42,12 +43,12 @@ const categoriesSlice = createSlice({
     // },
     [getAPICategories.fulfilled]: (state, action) => {
       console.log('🚀 ~ file: categories.js ~ line 44 ~ action', action);
-
-      state.entities.push(action.payload);
+      state.entities.concat(action.payload);
     },
   },
 });
 
 const { actions, reducer } = categoriesSlice;
-export const { incrementCount, decrementcount, incrementBy } = actions;
+export const { incrementCount, decrementcount, incrementBy, initCategories } =
+  actions;
 export default reducer;

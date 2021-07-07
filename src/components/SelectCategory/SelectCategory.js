@@ -6,7 +6,7 @@ import {
   decrementcount,
   incrementBy,
   getAPICategories,
-} from '../../store/categories.js';
+} from '../../store/categorySlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -18,18 +18,18 @@ const useStyles = makeStyles({
   },
 });
 
-function SelectCategory() {
+function SelectCategory({ categories }) {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.categories.count);
   let categorys = useSelector((state) => state.categories.entities);
   console.log(
-    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categorys',
+    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categorys: ',
     categorys
   );
 
-  useEffect(() => {
-    dispatch(getAPICategories());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAPICategories());
+  // }, [categorys]);
 
   const classes = useStyles();
   return (
@@ -38,19 +38,20 @@ function SelectCategory() {
         <Typography align="center" variant="h5">
           Browse Our Categories
         </Typography>
-        {/* <ButtonGroup variant='text' color='primary' aria-label='text primary button group' align='center'> */}
-        {/* {category.map((category) => {
-          return (
-            <Button
-              key={category.id}
-              id={category.id}
-              onClick={() => apiCall()}
-            >
-              {category.name}
-            </Button>
-          );
-        })} */}
-        {/* </ButtonGroup> */}
+        <ButtonGroup
+          variant="text"
+          color="primary"
+          aria-label="text primary button group"
+          align="center"
+        >
+          {/* {categorys.map((category) => {
+            return (
+              <Button key={category._id} id={category._id}>
+                {category.name}
+              </Button>
+            );
+          })} */}
+        </ButtonGroup>
       </div>
       <div>
         <h3>
