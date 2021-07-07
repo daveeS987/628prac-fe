@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { HYDRATE } from 'next-redux-wrapper';
+import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 
 export const getAPICategories = createAsyncThunk(
@@ -34,13 +34,13 @@ const categoriesSlice = createSlice({
     },
   },
   extraReducers: {
-    // [HYDRATE]: (state, action) => {
-    //   console.log('HYRDRATE', state, action.payload);
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
-    // },
+    [HYDRATE]: (state, action) => {
+      console.log('HYRDRATE', state, action.payload);
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
     [getAPICategories.fulfilled]: (state, action) => {
       console.log('🚀 ~ file: categories.js ~ line 44 ~ action', action);
       state.entities.concat(action.payload);
