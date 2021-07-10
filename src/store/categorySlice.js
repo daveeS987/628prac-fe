@@ -35,7 +35,7 @@ const categoriesSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('HYRDRATE', state, action.payload);
+      console.log('categories HYRDRATE', state, action.payload);
       return {
         ...state,
         ...action.payload,

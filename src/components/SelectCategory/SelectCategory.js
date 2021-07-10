@@ -21,19 +21,11 @@ const useStyles = makeStyles({
 function SelectCategory() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.categories.count);
-  let categorys = useSelector((state) => state.categories.entities);
+  let categories = useSelector((state) => state.categories.entities);
   console.log(
-    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categorys: ',
-    categorys
+    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categories: ',
+    categories
   );
-
-  useEffect(() => {
-    console.log('this got triggered');
-  }, [categorys]);
-
-  // useEffect(() => {
-  //   dispatch(getAPICategories());
-  // }, []);
 
   const classes = useStyles();
   return (
@@ -48,9 +40,9 @@ function SelectCategory() {
           aria-label="text primary button group"
           align="center"
         >
-          {categorys.map((category) => {
+          {categories.map((category) => {
             console.log(
-              '🚀 ~ file: SelectCategory.js ~ line 48 ~ {categorys.map ~ category',
+              '🚀 ~ file: SelectCategory.js ~ line 48 ~ {categories.map ~ category',
               category
             );
 
@@ -67,7 +59,7 @@ function SelectCategory() {
           For tesing purposes &gt;&gt; This is current count{' '}
           <span>{count}</span>
         </h3>
-        <p>{JSON.stringify(categorys)}</p>
+        <p>{JSON.stringify(categories)}</p>
 
         <button onClick={() => dispatch(incrementCount())}>Increment</button>
         <button onClick={() => dispatch(decrementcount())}>Decrement</button>
