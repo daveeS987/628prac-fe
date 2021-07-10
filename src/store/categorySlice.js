@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, ThunkAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 

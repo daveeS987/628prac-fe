@@ -42,7 +42,8 @@ import { wrapper } from '../store/store.js';
 // }
 
 export const getStaticProps = wrapper.getStaticProps(
-  (store) => async (props) => {
+  (store) => async (stuff) => {
+    console.log('🚀 ~ file: index.js ~ line 46 ~ stuff', stuff);
     console.log(
       '🚀 ~ file: index.js ~ line 45 ~ getStaticProps ~ store: ',
       store
@@ -51,7 +52,6 @@ export const getStaticProps = wrapper.getStaticProps(
       '🚀 ~ file: index.js ~ line 46 ~ getStaticProps ~ store.dispatch: ',
       store.dispatch
     );
-    // const dispatch = useDispatch();
 
     const client = await MongoClient.connect(process.env.DB_ADDRESS, {
       useNewUrlParser: true,
