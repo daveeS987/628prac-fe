@@ -1,3 +1,4 @@
+import React from 'react';
 // import { Provider } from 'react-redux';
 // import { store } from '../store/store.js';
 import { wrapper } from '../store/store.js';
@@ -12,6 +13,8 @@ import { wrapper } from '../store/store.js';
 // };
 
 const MyApp = ({ Component, pageProps }) => {
+  console.log('🚀 ~ file: _app.js ~ line 15 ~ MyApp ~ pageProps', pageProps);
+
   return <Component {...pageProps} />;
 };
 

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SelectCategory({ categories }) {
+function SelectCategory() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.categories.count);
   let categorys = useSelector((state) => state.categories.entities);
@@ -27,9 +27,13 @@ function SelectCategory({ categories }) {
     categorys
   );
 
+  useEffect(() => {
+    console.log('this got triggered');
+  }, [categorys]);
+
   // useEffect(() => {
   //   dispatch(getAPICategories());
-  // }, [categorys]);
+  // }, []);
 
   const classes = useStyles();
   return (
@@ -44,13 +48,18 @@ function SelectCategory({ categories }) {
           aria-label="text primary button group"
           align="center"
         >
-          {/* {categorys.map((category) => {
+          {categorys.map((category) => {
+            console.log(
+              '🚀 ~ file: SelectCategory.js ~ line 48 ~ {categorys.map ~ category',
+              category
+            );
+
             return (
               <Button key={category._id} id={category._id}>
                 {category.name}
               </Button>
             );
-          })} */}
+          })}
         </ButtonGroup>
       </div>
       <div>

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, ThunkAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 
@@ -18,7 +18,7 @@ const initialState = {
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState,
+  initialState: initialState,
   reducers: {
     incrementCount(state, action) {
       state.count += 1;
