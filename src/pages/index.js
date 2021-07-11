@@ -6,15 +6,11 @@ import Layout from '../components/Layout/Layout.js';
 import SelectCategory from '../components/SelectCategory/SelectCategory.js';
 // import Products from '../components/Products/Products.js';
 import { getAPICategories, initCategories } from '../store/categorySlice.js';
+import Counter from '../components/Counter.js';
 import { wrapper } from '../store/store.js';
 
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (stuff) => {
-    console.log(
-      '🚀 ~ file: index.js ~ line 45 ~ getStaticProps ~ store: ',
-      store
-    );
-
     const client = await MongoClient.connect(process.env.DB_ADDRESS, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -23,16 +19,16 @@ export const getStaticProps = wrapper.getStaticProps(
     const db = client.db();
     const categoryCollection = db.collection('categories');
     const categories = await categoryCollection.find().toArray();
-    console.log(
-      '🚀 ~ file: index.js ~ line 57 ~ getStaticProps ~ categories',
-      categories
-    );
 
     client.close();
+    let result = categories.map((category) => ({
+      name: category.name,
+      description: category.description,
+      id: category._id.toString(),
+    }));
 
-    store.dispatch(initCategories(categories));
+    store.dispatch(initCategories(result));
 
-    // dispatch(initCategories(categories));
     // return {
     //   props: {
     //     categories: categories.map((category) => ({
@@ -57,6 +53,7 @@ export default function Home() {
         <SelectCategory />
         {/* <Category />
         <Products /> */}
+        <Counter />
       </Layout>
     </>
   );

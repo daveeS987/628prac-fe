@@ -26,10 +26,14 @@ export const counterSlice = createSlice({
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('HYRDRATE', state, action.payload);
+      console.log('counter HYRDRATE state: ', state);
+      console.log(
+        'counter HYDRATE action.payload.counter: ',
+        action.payload.counter
+      );
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.counter,
       };
     },
   },

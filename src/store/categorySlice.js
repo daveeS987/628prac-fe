@@ -13,32 +13,27 @@ export const getAPICategories = createAsyncThunk(
 const initialState = {
   ids: [],
   entities: [],
-  count: 0,
 };
 
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState: initialState,
   reducers: {
-    incrementCount(state, action) {
-      state.count += 1;
-    },
-    decrementcount(state, action) {
-      state.count -= 1;
-    },
-    incrementBy(state, action) {
-      state.count += action.payload;
-    },
     initCategories(state, action) {
-      state.entities.concat(action.payload);
+      console.log('init categories action.payload: ', action.payload);
+      state.entities = action.payload;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('categories HYRDRATE', state, action.payload);
+      console.log('category HYRDRATE state: ', state);
+      console.log(
+        'category HYDRATE action.payload.categories: ',
+        action.payload.categories
+      );
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.categories,
       };
     },
     [getAPICategories.fulfilled]: (state, action) => {

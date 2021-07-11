@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import { makeStyles, Typography, ButtonGroup, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  incrementCount,
-  decrementcount,
-  incrementBy,
-  getAPICategories,
-} from '../../store/categorySlice.js';
+import { getAPICategories } from '../../store/categorySlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -20,12 +15,18 @@ const useStyles = makeStyles({
 
 function SelectCategory() {
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.categories.count);
   let categories = useSelector((state) => state.categories.entities);
-  console.log(
-    '🚀 ~ file: SelectCategory.js ~ line 25 ~ SelectCategory ~ categories: ',
-    categories
-  );
+
+  // useEffect(() => {
+  //   console.log('line 31 of selectCategory.js >>> state: ', state);
+  // }, [categories]);
+  let categoryButtons = categories.map((category) => {
+    return (
+      <Button key={category.id} id={category.id}>
+        {category.name}
+      </Button>
+    );
+  });
 
   const classes = useStyles();
   return (
@@ -40,30 +41,8 @@ function SelectCategory() {
           aria-label="text primary button group"
           align="center"
         >
-          {categories.map((category) => {
-            console.log(
-              '🚀 ~ file: SelectCategory.js ~ line 48 ~ {categories.map ~ category',
-              category
-            );
-
-            return (
-              <Button key={category._id} id={category._id}>
-                {category.name}
-              </Button>
-            );
-          })}
+          {categoryButtons}
         </ButtonGroup>
-      </div>
-      <div>
-        <h3>
-          For tesing purposes &gt;&gt; This is current count{' '}
-          <span>{count}</span>
-        </h3>
-        <p>{JSON.stringify(categories)}</p>
-
-        <button onClick={() => dispatch(incrementCount())}>Increment</button>
-        <button onClick={() => dispatch(decrementcount())}>Decrement</button>
-        <button onClick={() => dispatch(incrementBy(2))}>Increment by</button>
       </div>
     </>
   );

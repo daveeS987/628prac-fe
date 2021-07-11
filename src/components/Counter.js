@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
   increment,
   incrementByAmount,
   incrementAsync,
-} from '../store/counterSlice';
+} from '../store/counterSlice.js';
 
 export default function Counter() {
   let count = useSelector((state) => state.counter.value);
+  let state = useSelector((state) => state);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState(2);
+
+  useEffect(() => {
+    console.log('line 17 of counter.js >>> state: ', state);
+  }, [count]);
 
   return (
     <>
