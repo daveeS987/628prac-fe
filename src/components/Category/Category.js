@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { useSelector, useStore } from 'react-redux';
 import { Typography, makeStyles, Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,10 +11,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SelectCategories() {
+function Categories() {
+  const activeCategory = useSelector(
+    (state) => state.categories.activeCategory
+  );
   const classes = useStyles();
   return (
-    <Fragment>
+    <>
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography
@@ -24,7 +27,7 @@ function SelectCategories() {
             color="textPrimary"
             gutterBottom
           >
-            Product Category
+            {activeCategory.name}
           </Typography>
           <Typography
             variant="h5"
@@ -32,12 +35,12 @@ function SelectCategories() {
             color="textSecondary"
             paragraph
           >
-            Description of category
+            {activeCategory.description}
           </Typography>
         </Container>
       </div>
-    </Fragment>
+    </>
   );
 }
 
-export default SelectCategories;
+export default Categories;
