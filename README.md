@@ -14,8 +14,8 @@ currently work in progess....
 ## Tools & Dependencies
 
 - NextJS
-- React/Redux
-- Redux Thunk
+- React Redux
+- Redux Toolkit
 - MongoDB
 - Mongoose
 - Axios
@@ -25,4 +25,3 @@ currently work in progess....
 ## Getting Started
 
 - currently work in progress..
-
