@@ -17,9 +17,6 @@ function SelectCategory() {
   const dispatch = useDispatch();
   let categories = useSelector((state) => state.categories.entities);
 
-  // useEffect(() => {
-  //   console.log('line 31 of selectCategory.js >>> state: ', state);
-  // }, [categories]);
   let categoryButtons = categories.map((category) => {
     return (
       <Button key={category.id} id={category.id}>

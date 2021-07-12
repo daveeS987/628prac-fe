@@ -13,15 +13,17 @@ export const getAPICategories = createAsyncThunk(
 const initialState = {
   ids: [],
   entities: [],
+  activeCategory: {},
 };
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState: initialState,
+  initialState,
   reducers: {
     initCategories(state, action) {
       console.log('init categories action.payload: ', action.payload);
       state.entities = action.payload;
+      state.activeCategory = action.payload[0];
     },
   },
   extraReducers: {
@@ -38,7 +40,7 @@ const categoriesSlice = createSlice({
     },
     [getAPICategories.fulfilled]: (state, action) => {
       console.log('🚀 ~ file: categories.js ~ line 44 ~ action', action);
-      state.entities.concat(action.payload);
+      state.entities = action.payload;
     },
   },
 });
