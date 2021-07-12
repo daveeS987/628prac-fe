@@ -1,4 +1,4 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Typography,
   makeStyles,
@@ -30,36 +30,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Products() {
-  const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const classes = useStyles();
+  const products = useSelector((state) => state.products.entities);
+  const activeCategory = useSelector(
+    (state) => state.categories.activeCategory.name
+  );
+  let filtered = products.filter(
+    (product) => product.category === activeCategory
+  );
 
   return (
     <main>
       <Container className={classes.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={4}>
+          {filtered.map((product) => (
+            <Grid item key={product.id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
+                  image={product.imageUrl}
                   title="Image title"
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Heading
+                    {product.name}
                   </Typography>
-                  <Typography>
-                    This is a media card. You can use this section to describe
-                    the content.
-                  </Typography>
+                  <Typography>{product.description}</Typography>
+                  <Typography>In Stock: {product.inStock}</Typography>
                 </CardContent>
                 <CardActions>
                   <Button size="small" color="primary">
-                    View
+                    ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
-                    Edit
+                    VIEW DETAILS
                   </Button>
                 </CardActions>
               </Card>

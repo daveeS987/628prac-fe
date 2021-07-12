@@ -1,14 +1,13 @@
 import { MongoClient } from 'mongodb';
-import { useDispatch, useSelector } from 'react-redux';
 
 import Products from '../components/Products/Products.js';
 import Layout from '../components/Layout/Layout.js';
 import Category from '../components/Category/Category.js';
 import SelectCategory from '../components/SelectCategory/SelectCategory.js';
+
+import { wrapper } from '../store/store.js';
 import { initCategories } from '../store/categorySlice.js';
 import { initProducts } from '../store/productSlice.js';
-import Counter from '../components/Counter.js';
-import { wrapper } from '../store/store.js';
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const client = await MongoClient.connect(process.env.DB_ADDRESS, {
@@ -57,7 +56,6 @@ export default function Home() {
         <SelectCategory />
         <Category />
         <Products />
-        {/* <Counter /> */}
       </Layout>
     </>
   );

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { makeStyles, Typography, ButtonGroup, Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAPICategories } from '../../store/categorySlice.js';
+import { changeCategories } from '../../store/categorySlice.js';
 
 const useStyles = makeStyles({
   root: {
@@ -17,9 +17,13 @@ function SelectCategory() {
   const dispatch = useDispatch();
   let categories = useSelector((state) => state.categories.entities);
 
-  let categoryButtons = categories.map((category) => {
+  let categoryButtons = Object.values(categories).map((category) => {
     return (
-      <Button key={category.id} id={category.id}>
+      <Button
+        key={category.id}
+        id={category.id}
+        onClick={() => dispatch(changeCategories(category.id))}
+      >
         {category.name}
       </Button>
     );

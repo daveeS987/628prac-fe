@@ -20,24 +20,24 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     initProducts(state, action) {
-      console.log('init product action.payload: ', action.payload);
+      // console.log('init product action.payload: ', action.payload);
       state.entities = action.payload;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
-      console.log('product HYRDRATE state: ', state);
-      console.log(
-        'product HYDRATE action.payload.product: ',
-        action.payload.products
-      );
+      // console.log('product HYRDRATE state: ', state);
+      // console.log(
+      //   'product HYDRATE action.payload.product: ',
+      //   action.payload.products
+      // );
       return {
         ...state,
         ...action.payload.products,
       };
     },
     [getAPIproduct.fulfilled]: (state, action) => {
-      console.log('🚀 ~ file: product.js ~ line 44 ~ action', action);
+      // console.log('🚀 ~ file: product.js ~ line 44 ~ action', action);
       state.entities = action.payload;
     },
   },
