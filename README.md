@@ -14,6 +14,7 @@ currently work in progess....
 ## Tools & Dependencies
 
 - NextJS
+- Next-Redux-Wrapper
 - React Redux
 - Redux Toolkit
 - MongoDB
