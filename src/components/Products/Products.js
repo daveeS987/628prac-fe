@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import Link from 'next/link';
 import {
   Typography,
   makeStyles,
@@ -35,7 +36,7 @@ function Products() {
   const activeCategory = useSelector(
     (state) => state.categories.activeCategory.name
   );
-  let filtered = products.filter(
+  let filtered = Object.values(products).filter(
     (product) => product.category === activeCategory
   );
 
@@ -63,7 +64,7 @@ function Products() {
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
-                    VIEW DETAILS
+                    <Link href={`/details/${product.id}`}>VIEW DETAILS</Link>
                   </Button>
                 </CardActions>
               </Card>

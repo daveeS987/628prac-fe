@@ -21,7 +21,10 @@ const productSlice = createSlice({
   reducers: {
     initProducts(state, action) {
       // console.log('init product action.payload: ', action.payload);
-      state.entities = action.payload;
+      state.entities = action.payload.reduce((acc, cur) => {
+        acc[cur.id] = cur;
+        return acc;
+      }, {});
     },
   },
   extraReducers: {
