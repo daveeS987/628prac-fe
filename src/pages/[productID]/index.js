@@ -1,9 +1,12 @@
-import Layout from '../../components/Layout/Layout';
+import { MongoClient } from 'mongodb';
+import { useSelector } from 'react-redux';
 
+import Layout from '../../components/Layout/Layout';
 import { wrapper } from '../../store/store';
 
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (context) => {
+    console.log('🚀 ~ file: index.js ~ line 8 ~ store', store);
     console.log(
       '🚀 ~ file: details.js ~ line 4 ~ getStaticProps ~ context',
       context
@@ -21,12 +24,24 @@ export const getStaticProps = wrapper.getStaticProps(
 );
 
 export async function getStaticPaths() {
-  const numbers = ['1', '2', '3', '4'];
+  const client = await MongoClient.connect(process.env.DB_ADDRESS, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  await client.connect();
+  const db = client.db();
+  const productsCollection = db.collection('products');
+  let products = await productsCollection.find().toArray();
+  // console.log(
+  //   '🚀 ~ file: index.js ~ line 35 ~ getStaticPaths ~ products',
+  //   products
+  // );
+  client.close();
 
-  let paths = numbers.map((fakeId) => {
+  let paths = products.map((product) => {
     return {
       params: {
-        productID: fakeId,
+        productID: product._id.toString(),
       },
     };
   });
@@ -37,7 +52,11 @@ export async function getStaticPaths() {
   };
 }
 
-function Details() {
+function Details(props) {
+  console.log('🚀 ~ file: index.js ~ line 44 ~ Details ~ props', props);
+
+  const products = useSelector((state) => state.products.entities);
+  console.log('🚀 ~ file: index.js ~ line 45 ~ Details ~ products', products);
   return (
     <>
       <Layout>
