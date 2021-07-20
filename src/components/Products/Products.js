@@ -13,7 +13,8 @@ import {
   CardMedia,
 } from '@material-ui/core';
 
-// import { getProductCounts } from '../../store/productSlice';
+import { decrementStock } from '../../store/productSlice.js';
+import { addToCart } from '../../store/cartSlice.js';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -57,8 +58,8 @@ function Products({ products }) {
   // console.log('filtered line 63: ', filtered);
 
   const add = (productID) => {
-    // dispatch (addToCart (productID))
-    // dispatch (decrementStock (product))
+    dispatch(addToCart(productID));
+    dispatch(decrementStock(productID));
     console.log('This was pressed: ', productID);
   };
 
