@@ -1,5 +1,17 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
+
+import {
+  Typography,
+  makeStyles,
+  Container,
+  Grid,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+} from '@material-ui/core';
 
 import Layout from '../../components/Layout/Layout';
 import { wrapper } from '../../store/store';
@@ -61,16 +73,57 @@ export async function getStaticPaths() {
   };
 }
 
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+    height: '100%',
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
+
 function Details(props) {
+  const classes = useStyles();
+
   return (
     <>
       <Layout>
-        <h1>Product Details:</h1>
-        <h2>{props.name}</h2>
-        <h3>{props.description}</h3>
-        <h3>{props.imageUrl}</h3>
-        <h3>Price: {props.price}</h3>
-        <h3>In Stock: {props.inStock}</h3>
+        <Container className={classes.cardGrid} maxWidth="lg">
+          <Typography variant="h4" gutterBottom>
+            Product Details:
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6}>
+              <Card>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={props.imageUrl}
+                  title="Image title"
+                />
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="h5" gutterBottom>
+                {props.name}
+              </Typography>
+              <Typography gutterBottom>{props.description}</Typography>
+              <Typography variant="h6" gutterBottom>
+                In Stock: {props.inStock}
+              </Typography>
+              <Typography variant="h6">Price: {props.price}</Typography>
+            </Grid>
+          </Grid>
+        </Container>
       </Layout>
     </>
   );

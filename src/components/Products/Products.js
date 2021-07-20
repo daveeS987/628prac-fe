@@ -54,7 +54,7 @@ function Products({ products }) {
     return item.category === activeCategory;
   });
 
-  console.log('filtered line 63: ', filtered);
+  // console.log('filtered line 63: ', filtered);
 
   const add = (productID) => {
     // dispatch (addToCart (productID))
