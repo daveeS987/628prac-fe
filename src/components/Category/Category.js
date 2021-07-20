@@ -15,6 +15,7 @@ function Categories() {
   const activeCategory = useSelector(
     (state) => state.categories.activeCategory
   );
+
   const classes = useStyles();
   return (
     <>
