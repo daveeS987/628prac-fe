@@ -17,9 +17,8 @@ export const decrementStock = createAsyncThunk(
   async (productID, thunkAPI) => {
     // make api call to decrement
     // const result = await axios.get('/api/decrementCount');
-    console.log('thunkAPI: ', thunkAPI);
+
     thunkAPI.dispatch(getProductCounts());
-    console.log('productID from productslice line 18: ', productID);
   }
 );
 
