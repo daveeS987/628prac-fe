@@ -122,7 +122,7 @@ function Details(props) {
               <Typography variant="h6" gutterBottom>
                 In Stock: {props.inStock}
               </Typography>
-              <Typography variant="h6">Price: {props.price}</Typography>
+              <Typography variant="h6">Price: ${props.price}</Typography>
             </Grid>
           </Grid>
         </Container>
