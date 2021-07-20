@@ -79,7 +79,9 @@ function Products({ products }) {
                     {product.name}
                   </Typography>
                   <Typography>{product.description}</Typography>
-                  <Typography>In Stock: {product.inStock}</Typography>
+                  <Typography>
+                    In Stock: {product.inStock || 'Loading...'}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   <Button
