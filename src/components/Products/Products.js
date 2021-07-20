@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import Link from 'next/link';
 import {
   Typography,
   makeStyles,
@@ -10,6 +12,8 @@ import {
   CardContent,
   CardMedia,
 } from '@material-ui/core';
+
+// import { getProductCounts } from '../../store/productSlice';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -29,15 +33,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Products() {
+function Products({ products }) {
   const classes = useStyles();
-  const products = useSelector((state) => state.products.entities);
+  const dispatch = useDispatch();
   const activeCategory = useSelector(
     (state) => state.categories.activeCategory.name
   );
-  let filtered = products.filter(
-    (product) => product.category === activeCategory
-  );
+  let productCounts = useSelector((state) => state.products.entities);
+
+  let merged = { ...products } || {};
+
+  for (let property in merged) {
+    merged[property] = {
+      ...merged[property],
+      inStock: productCounts[property]?.inStock,
+    };
+  }
+
+  let filtered = Object.values(merged).filter((item) => {
+    return item.category === activeCategory;
+  });
+
+  // console.log('filtered line 63: ', filtered);
+
+  const add = (productID) => {
+    // dispatch (addToCart (productID))
+    // dispatch (decrementStock (product))
+    console.log('This was pressed: ', productID);
+  };
 
   return (
     <main>
@@ -59,11 +82,15 @@ function Products() {
                   <Typography>In Stock: {product.inStock}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => add(product.id)}
+                  >
                     ADD TO CART
                   </Button>
                   <Button size="small" color="primary">
-                    VIEW DETAILS
+                    <Link href={`/details/${product.id}`}>VIEW DETAILS</Link>
                   </Button>
                 </CardActions>
               </Card>

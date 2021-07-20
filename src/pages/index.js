@@ -1,13 +1,16 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { MongoClient } from 'mongodb';
 
 import Products from '../components/Products/Products.js';
 import Layout from '../components/Layout/Layout.js';
 import Category from '../components/Category/Category.js';
 import SelectCategory from '../components/SelectCategory/SelectCategory.js';
+import SimpleCart from '../components/SimpleCart/SimpleCart.js';
 
 import { wrapper } from '../store/store.js';
 import { initCategories } from '../store/categorySlice.js';
-import { initProducts } from '../store/productSlice.js';
+import { getProductCounts } from '../store/productSlice.js';
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const client = await MongoClient.connect(process.env.DB_ADDRESS, {
@@ -25,15 +28,17 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
 
   client.close();
 
-  products = products.map((product) => ({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    category: product.category,
-    inStock: product.inStock,
-    imageUrl: product.imageUrl,
-    id: product._id.toString(),
-  }));
+  products = products.reduce((acc, product) => {
+    acc[product._id.toString()] = {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category,
+      imageUrl: product.imageUrl,
+      id: product._id.toString(),
+    };
+    return acc;
+  }, {});
 
   categories = categories.map((category) => ({
     name: category.name,
@@ -42,20 +47,27 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   }));
 
   store.dispatch(initCategories(categories));
-  store.dispatch(initProducts(products));
 
   return {
-    props: {},
+    props: { categories, products },
   };
 });
 
-export default function Home() {
+export default function Home({ categories, products }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('UseEffect Ran on line 50');
+    dispatch(getProductCounts());
+  }, []);
+
   return (
     <>
       <Layout>
-        <SelectCategory />
+        <SimpleCart />
+        <SelectCategory categories={categories} />
         <Category />
-        <Products />
+        <Products products={products} />
       </Layout>
     </>
   );
