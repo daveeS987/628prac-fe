@@ -2,28 +2,23 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 
-export const getAPIproduct = createAsyncThunk(
+export const getProductCounts = createAsyncThunk(
   'product/getAPIproduct',
   async (thunkAPI) => {
-    const result = await axios.get('/api/getProduct');
+    const result = await axios.get('/api/getProductCount');
     return result.data;
   }
 );
 
 const initialState = {
-  entities: [],
+  entities: {},
 };
 
 const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    initProducts(state, action) {
-      state.entities = action.payload.reduce((acc, cur) => {
-        acc[cur.id] = { inStock: cur.inStock };
-        return acc;
-      }, {});
-    },
+    initProducts(state, action) {},
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -32,7 +27,7 @@ const productSlice = createSlice({
         ...action.payload.products,
       };
     },
-    [getAPIproduct.fulfilled]: (state, action) => {
+    [getProductCounts.fulfilled]: (state, action) => {
       state.entities = action.payload;
     },
   },

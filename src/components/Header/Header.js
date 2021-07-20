@@ -10,6 +10,8 @@ import {
   IconButton,
 } from '@material-ui/core';
 
+import { toggle } from '../../store/showCartSlice';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -48,7 +50,9 @@ function Header() {
           >
             Davee's NextJS Mock Virtual Store
           </Typography>
-          <Button color="inherit">Cart()</Button>
+          <Button color="inherit" onClick={() => dispatch(toggle())}>
+            Cart()
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -47,6 +47,12 @@ function SimpleCart() {
   let cart = useSelector((state) => state.cart);
   let showCart = useSelector((state) => state.showCart.show);
 
+  const destroy = (productID) => {
+    // dispatch (deleteFromCart (productID))
+    // dispatch (putStockBack (productID))
+    console.log('This was pressed: ', productID);
+  };
+
   return (
     <>
       <When condition={showCart}>

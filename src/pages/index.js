@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { MongoClient } from 'mongodb';
-import { useSelector } from 'react-redux';
 
 import Products from '../components/Products/Products.js';
 import Layout from '../components/Layout/Layout.js';
@@ -9,8 +10,7 @@ import SimpleCart from '../components/SimpleCart/SimpleCart.js';
 
 import { wrapper } from '../store/store.js';
 import { initCategories } from '../store/categorySlice.js';
-import { initProducts } from '../store/productSlice.js';
-// import { initializeState } from '../lib/initialize.js';
+import { getProductCounts } from '../store/productSlice.js';
 
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const client = await MongoClient.connect(process.env.DB_ADDRESS, {
@@ -28,15 +28,17 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
 
   client.close();
 
-  products = products.map((product) => ({
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    category: product.category,
-    inStock: product.inStock,
-    imageUrl: product.imageUrl,
-    id: product._id.toString(),
-  }));
+  products = products.reduce((acc, product) => {
+    acc[product._id.toString()] = {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category,
+      imageUrl: product.imageUrl,
+      id: product._id.toString(),
+    };
+    return acc;
+  }, {});
 
   categories = categories.map((category) => ({
     name: category.name,
@@ -45,7 +47,6 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   }));
 
   store.dispatch(initCategories(categories));
-  store.dispatch(initProducts(products));
 
   return {
     props: { categories, products },
@@ -53,6 +54,13 @@ export const getStaticProps = wrapper.getStaticProps((store) => async () => {
 });
 
 export default function Home({ categories, products }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('UseEffect Ran on line 50');
+    dispatch(getProductCounts());
+  }, []);
+
   return (
     <>
       <Layout>

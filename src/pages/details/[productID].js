@@ -62,14 +62,10 @@ export async function getStaticPaths() {
 }
 
 function Details(props) {
-  // const product = useSelector((state) => state.products.entities[oneID]);
-  // const theProduct = product[oneID];
-  // console.log('🚀 ~ file: index.js ~ line 67 ~ Details ~ products', product);
-
   return (
     <>
       <Layout>
-        <h1>Product Details Page for now</h1>
+        <h1>Product Details:</h1>
         <h2>{props.name}</h2>
         <h3>{props.description}</h3>
         <h3>{props.imageUrl}</h3>
