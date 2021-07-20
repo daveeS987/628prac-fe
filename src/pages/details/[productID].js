@@ -116,7 +116,9 @@ function Details(props) {
               <Typography variant="h5" gutterBottom>
                 {props.name}
               </Typography>
-              <Typography gutterBottom>{props.description}</Typography>
+              <Typography variant="h6" gutterBottom>
+                Description: {props.description}
+              </Typography>
               <Typography variant="h6" gutterBottom>
                 In Stock: {props.inStock}
               </Typography>
