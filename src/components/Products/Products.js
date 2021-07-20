@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Products() {
+function Products({ products }) {
   const classes = useStyles();
-  const products = useSelector((state) => state.products.entities);
+  // const products = useSelector((state) => state.products.entities);
   const activeCategory = useSelector(
     (state) => state.categories.activeCategory.name
   );
-  let filtered = Object.values(products).filter(
+  let filtered = products.filter(
     (product) => product.category === activeCategory
   );
 
