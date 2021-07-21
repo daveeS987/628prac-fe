@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Head from 'next/head';
+import SimpleCart from '../SimpleCart/SimpleCart';
 
 function Layout({ children }) {
   return (
@@ -14,6 +15,7 @@ function Layout({ children }) {
         />
       </Head>
       <Header />
+      <SimpleCart />
       {children}
       <Footer />
     </>

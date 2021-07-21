@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 
 export const getProductCounts = createAsyncThunk(
   'products/getAPIproduct',
   async (thunkAPI) => {
-    console.log('getProducts was triggered');
     const result = await axios.get('/api/getProductCount');
     return result.data;
   }
@@ -15,11 +13,17 @@ export const getProductCounts = createAsyncThunk(
 export const decrementStock = createAsyncThunk(
   'products/decrementStock',
   async (productID, thunkAPI) => {
-    console.log('decrement stock got triggered');
-
-    const update = await axios.patch('/api/decrementCount', {
+    await axios.patch('/api/decrementCount', {
       productID,
     });
+    thunkAPI.dispatch(getProductCounts());
+  }
+);
+
+export const putStockBack = createAsyncThunk(
+  'products/putStockBack',
+  async (product, thunkAPI) => {
+    await axios.patch('/api/putStockBack', product);
     thunkAPI.dispatch(getProductCounts());
   }
 );
@@ -45,8 +49,10 @@ const productSlice = createSlice({
       state.entities = action.payload;
     },
     [decrementStock.fulfilled]: (state, action) => {
-      console.log('decrementStock.fulfilled line 45');
-      // return state;
+      console.log('decrementStock.fulfilled line 59');
+    },
+    [putStockBack.fulfilled]: (state, action) => {
+      console.log('putStockBack got triggered line 62');
     },
   },
 });

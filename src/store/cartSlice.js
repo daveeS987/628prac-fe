@@ -19,6 +19,9 @@ const cartSlice = createSlice({
         };
       }
     },
+    deleteFromCart(state, action) {
+      delete state[action.payload];
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -31,5 +34,5 @@ const cartSlice = createSlice({
 });
 
 const { actions, reducer } = cartSlice;
-export const { addToCart } = actions;
+export const { addToCart, deleteFromCart } = actions;
 export default reducer;

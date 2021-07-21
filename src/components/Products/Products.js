@@ -55,12 +55,9 @@ function Products({ products }) {
     return item.category === activeCategory;
   });
 
-  // console.log('filtered line 63: ', filtered);
-
   const add = (productID, productName) => {
     dispatch(addToCart({ productID, productName }));
     dispatch(decrementStock(productID));
-    console.log('This was pressed: ', productID);
   };
 
   return (

@@ -12,6 +12,9 @@ import {
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import { deleteFromCart } from '../../store/cartSlice';
+import { putStockBack } from '../../store/productSlice';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -46,12 +49,10 @@ export default function SimpleCart() {
 
   let cart = useSelector((state) => state.cart);
   let showCart = useSelector((state) => state.showCart.show);
-  console.log('cart: ', cart);
 
-  const destroy = (productID, product) => {
-    // dispatch (deleteFromCart (productID))
-    // dispatch (putStockBack (productID))
-    console.log('This was pressed: ', productID);
+  const destroy = (productID, productCount) => {
+    dispatch(deleteFromCart(productID));
+    dispatch(putStockBack({ id: productID, count: productCount }));
   };
 
   return (
@@ -65,7 +66,7 @@ export default function SimpleCart() {
                 <ListItemText secondary={'QTY: ' + product[1].count} />
                 <IconButton
                   aria-label="delete"
-                  onClick={() => destroy(product[0], product[1])}
+                  onClick={() => destroy(product[0], product[1].count)}
                 >
                   <DeleteIcon />
                 </IconButton>
