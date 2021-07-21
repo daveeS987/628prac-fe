@@ -18,6 +18,8 @@ currently work in progess....
 - Next-Redux-Wrapper
 - React Redux
 - Redux Toolkit
+- NextAuth
+- Auth0
 - MongoDB
 - Axios
 - Material UI
