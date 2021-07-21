@@ -10,6 +10,7 @@ currently work in progess....
 
 - [Deployed Site](https://nextjs-practice-virtual-store.vercel.app/)
 - [Next JS](https://nextjs.org/docs/getting-started)
+- [Originally Coded with Create React App](https://github.com/davee-401-advanced-javascript/react-redux-virtual-store)
 
 ## Tools & Dependencies
 
@@ -18,7 +19,6 @@ currently work in progess....
 - React Redux
 - Redux Toolkit
 - MongoDB
-- Mongoose
 - Axios
 - Material UI
 - Vercel
