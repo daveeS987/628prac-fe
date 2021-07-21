@@ -8,11 +8,19 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    increment(state, action) {
-      return state;
+    addToCart(state, action) {
+      console.log('action from line 12:', action.payload);
+      if (state[action.payload.productID]) {
+        state[action.payload.productID].count += 1;
+      } else {
+        state[action.payload.productID] = {
+          count: 1,
+          name: action.payload.productName,
+        };
+      }
     },
-    decrement(state, action) {
-      return state;
+    deleteFromCart(state, action) {
+      delete state[action.payload];
     },
   },
   extraReducers: {
@@ -26,5 +34,5 @@ const cartSlice = createSlice({
 });
 
 const { actions, reducer } = cartSlice;
-export const { increment } = actions;
+export const { addToCart, deleteFromCart } = actions;
 export default reducer;

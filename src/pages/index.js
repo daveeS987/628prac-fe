@@ -6,7 +6,7 @@ import Products from '../components/Products/Products.js';
 import Layout from '../components/Layout/Layout.js';
 import Category from '../components/Category/Category.js';
 import SelectCategory from '../components/SelectCategory/SelectCategory.js';
-import SimpleCart from '../components/SimpleCart/SimpleCart.js';
+// import SimpleCart from '../components/SimpleCart/SimpleCart.js';
 
 import { wrapper } from '../store/store.js';
 import { initCategories } from '../store/categorySlice.js';
@@ -57,14 +57,13 @@ export default function Home({ categories, products }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('UseEffect Ran on line 50');
     dispatch(getProductCounts());
   }, []);
 
   return (
     <>
       <Layout>
-        <SimpleCart />
+        {/* <SimpleCart /> */}
         <SelectCategory categories={categories} />
         <Category />
         <Products products={products} />

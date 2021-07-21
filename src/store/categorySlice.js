@@ -1,14 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import axios from 'axios';
-
-// export const getAPICategories = createAsyncThunk(
-//   'categories/getAPICategories',
-//   async (thunkAPI) => {
-//     const result = await axios.get('/api/getCategories');
-//     return result.data;
-//   }
-// );
 
 const initialState = {
   entities: {},
@@ -37,9 +28,6 @@ const categoriesSlice = createSlice({
         ...action.payload.categories,
       };
     },
-    // [getAPICategories.fulfilled]: (state, action) => {
-    //   state.entities = action.payload;
-    // },
   },
 });
 
