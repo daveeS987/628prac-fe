@@ -1,5 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb';
-// import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
   Typography,
@@ -15,6 +15,8 @@ import {
 
 import Layout from '../../components/Layout/Layout';
 import { wrapper } from '../../store/store';
+import { addToCart } from '../../store/cartSlice';
+import { decrementStock } from '../../store/productSlice';
 
 export const getStaticProps = wrapper.getStaticProps(
   (store) => async (context) => {
@@ -94,6 +96,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Details(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const add = (productID, productName) => {
+    dispatch(addToCart({ productID, productName }));
+    dispatch(decrementStock(productID));
+  };
 
   return (
     <>
@@ -123,6 +131,14 @@ function Details(props) {
                 In Stock: {props.inStock}
               </Typography>
               <Typography variant="h6">Price: ${props.price}</Typography>
+              <Button
+                size="medium"
+                variant="contained"
+                color="primary"
+                onClick={() => add(props.id, props.name)}
+              >
+                ADD TO CART
+              </Button>
             </Grid>
           </Grid>
         </Container>
