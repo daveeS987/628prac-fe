@@ -57,15 +57,12 @@ function SimpleCart() {
     <>
       <When condition={showCart}>
         <List className={classes.root}>
-          {/* {Object.entries(cart).map((product) => {
+          {/* {Object.entries(cart).map(([key, value]) => {
             return (
-              <ListItem key={product[0]}>
-                <ListItemText primary={product[1].obj.name} />
-                <ListItemText secondary={'QTY: ' + product[1].count} />
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => destroy(product[1])}
-                >
+              <ListItem key={key}>
+                <ListItemText primary={value.name} />
+                <ListItemText secondary={'QTY: ' + value.count} />
+                <IconButton aria-label="delete" onClick={() => destroy(key)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItem>
