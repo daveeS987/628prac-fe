@@ -3,10 +3,28 @@ import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 
 export const getProductCounts = createAsyncThunk(
-  'product/getAPIproduct',
+  'products/getAPIproduct',
   async (thunkAPI) => {
     const result = await axios.get('/api/getProductCount');
     return result.data;
+  }
+);
+
+export const decrementStock = createAsyncThunk(
+  'products/decrementStock',
+  async (productID, thunkAPI) => {
+    await axios.patch('/api/decrementCount', {
+      productID,
+    });
+    thunkAPI.dispatch(getProductCounts());
+  }
+);
+
+export const putStockBack = createAsyncThunk(
+  'products/putStockBack',
+  async (product, thunkAPI) => {
+    await axios.patch('/api/putStockBack', product);
+    thunkAPI.dispatch(getProductCounts());
   }
 );
 
@@ -29,6 +47,12 @@ const productSlice = createSlice({
     },
     [getProductCounts.fulfilled]: (state, action) => {
       state.entities = action.payload;
+    },
+    [decrementStock.fulfilled]: (state, action) => {
+      console.log('decrementStock.fulfilled line 59');
+    },
+    [putStockBack.fulfilled]: (state, action) => {
+      console.log('putStockBack got triggered line 62');
     },
   },
 });

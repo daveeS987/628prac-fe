@@ -33,6 +33,11 @@ function Header() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  console.log('🚀 ~ file: Header.js ~ line 36 ~ cart', cart);
+
+  let cartLength = Object.values(cart).reduce((acc, cur) => {
+    return acc + cur.count;
+  }, 0);
 
   return (
     <div className={classes.root}>
@@ -57,7 +62,7 @@ function Header() {
             Davee's NextJS Mock Virtual Store
           </Typography>
           <Button color="inherit" onClick={() => dispatch(toggle())}>
-            Cart()
+            Cart({cartLength})
           </Button>
         </Toolbar>
       </AppBar>

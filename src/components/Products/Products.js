@@ -13,7 +13,8 @@ import {
   CardMedia,
 } from '@material-ui/core';
 
-// import { getProductCounts } from '../../store/productSlice';
+import { decrementStock } from '../../store/productSlice.js';
+import { addToCart } from '../../store/cartSlice.js';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -54,12 +55,9 @@ function Products({ products }) {
     return item.category === activeCategory;
   });
 
-  // console.log('filtered line 63: ', filtered);
-
-  const add = (productID) => {
-    // dispatch (addToCart (productID))
-    // dispatch (decrementStock (product))
-    console.log('This was pressed: ', productID);
+  const add = (productID, productName) => {
+    dispatch(addToCart({ productID, productName }));
+    dispatch(decrementStock(productID));
   };
 
   return (
@@ -79,13 +77,15 @@ function Products({ products }) {
                     {product.name}
                   </Typography>
                   <Typography>{product.description}</Typography>
-                  <Typography>In Stock: {product.inStock}</Typography>
+                  <Typography>
+                    In Stock: {product.inStock || 'Loading...'}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   <Button
                     size="small"
                     color="primary"
-                    onClick={() => add(product.id)}
+                    onClick={() => add(product.id, product.name)}
                   >
                     ADD TO CART
                   </Button>

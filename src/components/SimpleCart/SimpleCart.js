@@ -10,7 +10,10 @@ import {
   Button,
 } from '@material-ui/core';
 
-import { DeleteIcon } from '@material-ui/icons';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { deleteFromCart } from '../../store/cartSlice';
+import { putStockBack } from '../../store/productSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,37 +43,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SimpleCart() {
+export default function SimpleCart() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   let cart = useSelector((state) => state.cart);
   let showCart = useSelector((state) => state.showCart.show);
 
-  const destroy = (productID) => {
-    // dispatch (deleteFromCart (productID))
-    // dispatch (putStockBack (productID))
-    console.log('This was pressed: ', productID);
+  const destroy = (productID, productCount) => {
+    dispatch(deleteFromCart(productID));
+    dispatch(putStockBack({ id: productID, count: productCount }));
   };
 
   return (
     <>
       <When condition={showCart}>
         <List className={classes.root}>
-          {/* {Object.entries(cart).map((product) => {
+          {Object.entries(cart).map((product) => {
             return (
               <ListItem key={product[0]}>
-                <ListItemText primary={product[1].obj.name} />
+                <ListItemText primary={product[1].name} />
                 <ListItemText secondary={'QTY: ' + product[1].count} />
                 <IconButton
                   aria-label="delete"
-                  onClick={() => destroy(product[1])}
+                  onClick={() => destroy(product[0], product[1].count)}
                 >
                   <DeleteIcon />
                 </IconButton>
               </ListItem>
             );
-          })} */}
+          })}
           <Button
             variant="contained"
             color="primary"
@@ -83,5 +85,3 @@ function SimpleCart() {
     </>
   );
 }
-
-export default SimpleCart;
