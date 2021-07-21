@@ -57,8 +57,8 @@ function Products({ products }) {
 
   // console.log('filtered line 63: ', filtered);
 
-  const add = (productID) => {
-    dispatch(addToCart(productID));
+  const add = (productID, productName) => {
+    dispatch(addToCart({ productID, productName }));
     dispatch(decrementStock(productID));
     console.log('This was pressed: ', productID);
   };
@@ -88,7 +88,7 @@ function Products({ products }) {
                   <Button
                     size="small"
                     color="primary"
-                    onClick={() => add(product.id)}
+                    onClick={() => add(product.id, product.name)}
                   >
                     ADD TO CART
                   </Button>

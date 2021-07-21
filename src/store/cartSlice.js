@@ -2,15 +2,22 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 import axios from 'axios';
 
-const initialState = { count: 0 };
+const initialState = {};
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart(state, action) {
-      console.log('action from line 12:', action);
-      state.count += 1;
+      console.log('action from line 12:', action.payload);
+      if (state[action.payload.productID]) {
+        state[action.payload.productID].count += 1;
+      } else {
+        state[action.payload.productID] = {
+          count: 1,
+          name: action.payload.productName,
+        };
+      }
     },
   },
   extraReducers: {

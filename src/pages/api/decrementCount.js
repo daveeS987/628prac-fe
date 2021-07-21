@@ -1,6 +1,7 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 async function handleDecrementCount(req, res) {
+  console.log('req from decrement count: ', req.body);
   const client = await MongoClient.connect(process.env.DB_ADDRESS, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -9,15 +10,13 @@ async function handleDecrementCount(req, res) {
   const db = client.db();
   const productsCollection = db.collection('products');
 
-  const results = await productsCollection.find().toArray();
+  const filter = { _id: ObjectId(req.body.productID) };
+  await productsCollection.updateOne(filter, {
+    $inc: { inStock: -1 },
+  });
   client.close();
 
-  let productCounts = results.reduce((acc, cur) => {
-    acc[cur._id.toString()] = { inStock: cur.inStock };
-    return acc;
-  }, {});
-
-  res.status(200).json(productCounts);
+  res.status(200).json({ message: 'decremented' });
 }
 
 export default handleDecrementCount;

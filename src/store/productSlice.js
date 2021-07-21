@@ -15,9 +15,11 @@ export const getProductCounts = createAsyncThunk(
 export const decrementStock = createAsyncThunk(
   'products/decrementStock',
   async (productID, thunkAPI) => {
-    // make api call to decrement
-    // const result = await axios.get('/api/decrementCount');
+    console.log('decrement stock got triggered');
 
+    const update = await axios.patch('/api/decrementCount', {
+      productID,
+    });
     thunkAPI.dispatch(getProductCounts());
   }
 );
@@ -43,10 +45,8 @@ const productSlice = createSlice({
       state.entities = action.payload;
     },
     [decrementStock.fulfilled]: (state, action) => {
-      console.log('line 45');
-      const dispatch = useDispatch();
-      dispatch(getProductCounts());
-      return state;
+      console.log('decrementStock.fulfilled line 45');
+      // return state;
     },
   },
 });
