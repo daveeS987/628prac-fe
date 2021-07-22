@@ -48,9 +48,7 @@ env file should have the following
 
 ```
 DB_ADDRESS= << GET FROM MONGODB WEBSITE >>
-
 NEXTAUTH_URL=http://localhost:3000  << Used for local development. Change to actual site address when you deploy. >>
-
 AUTH0_ID= <<GET FROM AUTH0 WEBSITE>>
 AUTH0_SECRET= <<GET FROM AUTH0 WEBSITE>>
 AUTH0_DOMAIN=  <<GET FROM AUTH0 WEBSITE>>
@@ -94,7 +92,7 @@ Each Products document will have the following schema:
 }
 ```
 
-The app will filter products based on category name. So "name" property in categories will need to match with "category" property in products.
+The app will filter products based on category name. So "name" property in categories will need to match with "category" property in products. You can have multiple categories and matching products.
 
 ### 5. Start the application
 
