@@ -1,4 +1,4 @@
-# Next JS Practice
+# Next JS Mock Virtual Store
 
 ## Overview
 
