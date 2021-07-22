@@ -6,7 +6,6 @@ import Products from '../components/Products/Products.js';
 import Layout from '../components/Layout/Layout.js';
 import Category from '../components/Category/Category.js';
 import SelectCategory from '../components/SelectCategory/SelectCategory.js';
-// import SimpleCart from '../components/SimpleCart/SimpleCart.js';
 
 import { wrapper } from '../store/store.js';
 import { initCategories } from '../store/categorySlice.js';

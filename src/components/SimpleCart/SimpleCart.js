@@ -1,5 +1,6 @@
 import { When } from 'react-if';
 import { useSelector, useDispatch } from 'react-redux';
+import Link from 'next/link';
 
 import {
   makeStyles,
@@ -73,13 +74,15 @@ export default function SimpleCart() {
               </ListItem>
             );
           })}
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            Checkout
-          </Button>
+          <Link href={'/checkout'}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              Checkout
+            </Button>
+          </Link>
         </List>
       </When>
     </>
