@@ -62,7 +62,6 @@ export default function Home({ categories, products }) {
   return (
     <>
       <Layout>
-        {/* <SimpleCart /> */}
         <SelectCategory categories={categories} />
         <Category />
         <Products products={products} />

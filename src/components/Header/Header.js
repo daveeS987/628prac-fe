@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   makeStyles,
   AppBar,
@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import { toggle } from '../../store/showCartSlice';
+import CartModal from '../CartModal/CartModal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +27,34 @@ const useStyles = makeStyles((theme) => ({
   cart: {
     marginLeft: '60%',
   },
+  paper: {
+    position: 'absolute',
+    width: '20rem',
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: `5rem`,
+    right: `1rem`,
+  },
 }));
 
 function Header() {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log('🚀 ~ file: Header.js ~ line 36 ~ cart', cart);
+  const [open, setOpen] = useState(false);
 
   let cartLength = Object.values(cart).reduce((acc, cur) => {
     return acc + cur.count;
   }, 0);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClick = () => {
+    setOpen(true);
+  };
 
   return (
     <div className={classes.root}>
@@ -61,11 +78,12 @@ function Header() {
           >
             Davee's NextJS Mock Virtual Store
           </Typography>
-          <Button color="inherit" onClick={() => dispatch(toggle())}>
+          <Button color="inherit" onClick={handleClick}>
             Cart({cartLength})
           </Button>
         </Toolbar>
       </AppBar>
+      <CartModal open={open} handleClose={handleClose} />
     </div>
   );
 }
