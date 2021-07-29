@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import {
   Typography,
@@ -14,6 +14,9 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import Layout from '../components/Layout/Layout';
+
+import { deleteFromCart } from '../store/cartSlice';
+import { putStockBack } from '../store/productSlice';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -41,7 +44,13 @@ const useStyles = makeStyles((theme) => ({
 function CheckoutPage() {
   const [session, loading] = useSession();
   const classes = useStyles();
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
+  const destroy = (productID, productCount) => {
+    dispatch(deleteFromCart(productID));
+    dispatch(putStockBack({ id: productID, count: productCount }));
+  };
 
   return (
     <>
