@@ -5,7 +5,6 @@ import Head from 'next/head';
 
 import { ThemeProvider } from '@material-ui/styles';
 import { createTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
 import blue from '@material-ui/core/colors/blue';
 
