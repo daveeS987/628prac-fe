@@ -3,7 +3,6 @@ import { createWrapper } from 'next-redux-wrapper';
 import categories from './categorySlice.js';
 import products from './productSlice.js';
 import cart from './cartSlice.js';
-import showCart from './showCartSlice.js';
 
 const makeStore = () =>
   configureStore({
@@ -11,7 +10,6 @@ const makeStore = () =>
       categories,
       products,
       cart,
-      showCart,
     },
     devTools: true,
   });
